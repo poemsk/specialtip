@@ -10,7 +10,10 @@ import android.widget.TextView;
 import com.poepoemyintswe.specialtips.R;
 import com.poepoemyintswe.specialtips.models.Feed;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -43,10 +46,23 @@ public class FeedAdapter extends BaseAdapter {
 
         final Feed feedItem = (Feed) getItem(position);
         holder.title.setText(feedItem.title);
-        holder.date.setText(feedItem.date);
+        holder.date.setText(changeDateFormat(feedItem.date));
         holder.content.setText(feedItem.content);
 
         return view;
+    }
+
+    public String changeDateFormat(String d) {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+        try {
+            Date date = sdf1.parse(d);
+            String formatted_date = sdf.format(date);
+            return formatted_date;
+        } catch (ParseException e) {
+            return d;
+        }
+
     }
 
     @Override

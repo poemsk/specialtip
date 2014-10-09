@@ -83,11 +83,11 @@ public class MainActivity extends ActionBarActivity {
             feedListView.setVisibility(View.GONE);
 
             Gson gson = new GsonBuilder()
-                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                    .create();
+                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 
             RestAdapter restAdapter = new RestAdapter.Builder()
-                    .setEndpoint(Config.BASE_URL).setConverter(new GsonConverter(gson)).build();
+                    .setEndpoint(Config.BASE_URL).setConverter
+                            (new GsonConverter(gson)).setLogLevel(RestAdapter.LogLevel.BASIC).build();
 
             GetFeed getFeed = restAdapter.create(GetFeed.class);
 
@@ -105,6 +105,7 @@ public class MainActivity extends ActionBarActivity {
 
 
                 }
+
                 @Override
                 public void failure(RetrofitError error) {
                     Log.d(TAG, error.toString());
