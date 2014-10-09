@@ -3,7 +3,6 @@ package com.poepoemyintswe.specialtips.ui;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
 import com.poepoemyintswe.specialtips.Config;
 import com.poepoemyintswe.specialtips.R;
 import com.poepoemyintswe.specialtips.adapter.FeedAdapter;
@@ -23,14 +21,12 @@ import com.poepoemyintswe.specialtips.models.Feed;
 import com.poepoemyintswe.specialtips.service.GetFeed;
 import com.poepoemyintswe.specialtips.util.NetworkConnectivityCheck;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import retrofit.Callback;
-import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -55,12 +51,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        FadingActionBarHelper helper = new FadingActionBarHelper()
-//                .actionBarBackground(getResources().getColor(R.color.actionbar_color))
-//                .contentLayout(R.layout.activity_main);
-//        setContentView(helper.createView(this));
-//        helper.initActionBar(this);
-
         ButterKnife.inject(this);
         feedItems = new ArrayList<Feed>();
 
@@ -115,7 +105,6 @@ public class MainActivity extends ActionBarActivity {
 
 
                 }
-
                 @Override
                 public void failure(RetrofitError error) {
                     Log.d(TAG, error.toString());
