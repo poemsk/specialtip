@@ -66,6 +66,7 @@ public class MainActivity extends ActionBarActivity {
 
         refresh.setColorSchemeResources(R.color.swipe_refresh_color1, R.color.swipe_refresh_color2,
                 R.color.swipe_refresh_color3, R.color.swipe_refresh_color4);
+        refresh.canChildScrollUp();
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
