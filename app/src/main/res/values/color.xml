@@ -9,5 +9,5 @@
     <color name="title_text_color">#000000</color>
     <color name="content_text_color">#ff808080</color>
     <color name="param_link">#ff3f42a5</color>
-    <color name="background">#ffababab</color>
+    <color name="background">#ffe4e4e4</color>
 </resources>

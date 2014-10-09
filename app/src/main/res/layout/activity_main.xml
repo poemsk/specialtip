@@ -30,7 +30,7 @@
             android:divider="@android:color/transparent"
             android:clickable="true"
             android:listSelector="@android:color/transparent"
-            android:dividerHeight="@dimen/activity_horizontal_margin"
+            android:dividerHeight="8dp"
             android:visibility="gone" />
 
     </LinearLayout>
