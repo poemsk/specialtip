@@ -4,5 +4,6 @@
     <string name="app_name">Special Tips</string>
     <string name="swipe_to_refresh">Please Swipe to refresh!</string>
     <string name="action_settings">Settings</string>
+  <string name="share">Share</string>
 
 </resources>
