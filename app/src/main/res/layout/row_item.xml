@@ -54,6 +54,7 @@
     <Button
         android:id="@+id/share_btn"
         android:text="Share"
+        android:focusable="false"
         style="@style/ContentStyle"
         android:background="@android:color/transparent"
         android:layout_width="wrap_content"
