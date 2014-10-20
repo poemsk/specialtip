@@ -56,6 +56,7 @@
             android:id="@+id/share_btn"
             android:text="Share"
             android:focusable="false"
+            android:background="#ffd9d9d9"
             style="@style/ContentStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
