@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -98,7 +98,7 @@ public class FeedAdapter extends BaseAdapter {
     @InjectView(R.id.date) TextView date;
     @InjectView(R.id.content) TextView content;
 
-    @InjectView(R.id.share_btn) Button share;
+    @InjectView(R.id.share_btn) ImageButton share;
 
     public ViewHolder(View view) {
       ButterKnife.inject(this, view);
