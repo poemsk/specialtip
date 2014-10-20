@@ -10,7 +10,7 @@
   <color name="title_text_color">#ff7a7979</color>
   <color name="content_text_color">#ff444444</color>
   <color name="param_link">#ff3f42a5</color>
-  <color name="background">#ffeaeaea</color>
+  <color name="background">#ffe5e5e5</color>
   <color name="share_text_color">#ff5d5d5d</color>
 
   <!--Actionbar Colors-->
