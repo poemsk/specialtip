@@ -30,7 +30,7 @@
     <item name="android:layout_marginLeft">@dimen/activity_vertical_margin</item>
     <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
     <item name="android:layout_marginBottom">@dimen/margin</item>
-    <item name="android:textSize">24sp</item>
+    <item name="android:textSize">22sp</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textColor">@color/title_text_color</item>
   </style>

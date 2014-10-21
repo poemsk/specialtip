@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="4dp"
-    android:paddingBottom="4dp"
+    android:paddingTop="@dimen/margin"
+    android:paddingBottom="@dimen/margin"
     android:layout_gravity="center">
 
   <LinearLayout

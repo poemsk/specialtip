@@ -6,13 +6,11 @@ package com.poepoemyintswe.specialtips.models;
 
 import java.io.Serializable;
 
+public class Feed implements Serializable {
 
-public class Feed implements Serializable{
-
-    public Integer id;
-    public String title;
-    public String permalink;
-    public String content;
-    public String date;
-
+  public Integer id;
+  public String title;
+  public String permalink;
+  public String content;
+  public String date;
 }

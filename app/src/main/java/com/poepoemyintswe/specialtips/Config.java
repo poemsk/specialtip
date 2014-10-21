@@ -5,10 +5,9 @@ package com.poepoemyintswe.specialtips;
  */
 public class Config {
 
-    public static final String BASE_URL = "http://specialtipsmm.com";
-    public static final String FEED_URL = "/?feed=json";
+  public static final String BASE_URL = "http://specialtipsmm.com";
+  public static final String FEED_URL = "/?feed=json";
 
-
-    //public static final String BASE_URL = "https://raw.githubusercontent.com/PoePoeMyintSwe/specialtip/master";
-    //public static final String FEED_URL = "/dummyjson";
+  //public static final String BASE_URL = "https://raw.githubusercontent.com/PoePoeMyintSwe/specialtip/master";
+  //public static final String FEED_URL = "/dummyjson";
 }

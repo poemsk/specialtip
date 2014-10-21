@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.poepoemyintswe.specialtips.R;
@@ -16,6 +17,7 @@ import com.poepoemyintswe.specialtips.R;
  */
 public class SwipeFragment extends Fragment {
   @InjectView(R.id.swipe_to_refresh_text) SwipeRefreshLayout refreshLayout;
+  @InjectView(R.id.msg) TextView msg;
 
   public SwipeFragment() {
 
@@ -26,6 +28,8 @@ public class SwipeFragment extends Fragment {
 
     View rootView = inflater.inflate(R.layout.fragment_swipe, container, false);
     ButterKnife.inject(this, rootView);
+
+    msg.setText(R.string.swipe_to_refresh);
 
     refreshLayout.setColorSchemeResources(R.color.swipe_refresh_color1,
         R.color.swipe_refresh_color2, R.color.swipe_refresh_color3, R.color.swipe_refresh_color4);

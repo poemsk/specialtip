@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -30,15 +33,20 @@ import retrofit.client.Response;
  */
 public class FeedFragment extends Fragment {
 
+  private final String TAG = FeedFragment.class.getSimpleName();
   @InjectView(R.id.feed) ListView feedListView;
   @InjectView(R.id.swipe_to_refresh_list) SwipeRefreshLayout swipeRefreshLayout;
-
-  private final String TAG = FeedFragment.class.getSimpleName();
-
   private ArrayList<Feed> feedItems;
 
   public FeedFragment() {
 
+  }
+
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    // Add this method for this fragment to handle the menu
+    setHasOptionsMenu(true);
   }
 
   @Override
@@ -94,6 +102,7 @@ public class FeedFragment extends Fragment {
           feedItems = (ArrayList<Feed>) feeds;
           Log.d(TAG, feeds.size() + "");
           FeedAdapter adapter = new FeedAdapter(getActivity(), feedItems);
+          adapter.notifyDataSetChanged();
           feedListView.setAdapter(adapter);
           StopRefreshing();
         }
@@ -101,15 +110,13 @@ public class FeedFragment extends Fragment {
         @Override
         public void failure(RetrofitError error) {
           Log.d(TAG, error.toString());
-          Toast.makeText(getActivity(), "Please Try Again....", Toast.LENGTH_SHORT).show();
           StopRefreshing();
-
           ReplaceCurrentFragment();
         }
       });
     } else {
-      Toast.makeText(getActivity(), "Please Check Your Connection....", Toast.LENGTH_SHORT).show();
       ReplaceCurrentFragment();
+      Toast.makeText(getActivity(), R.string.check_connection, Toast.LENGTH_SHORT).show();
     }
   }
 
@@ -119,5 +126,21 @@ public class FeedFragment extends Fragment {
     fragmentTransaction.addToBackStack(null);
     fragmentTransaction.hide(FeedFragment.this);
     fragmentTransaction.add(R.id.container, fragment).commit();
+  }
+
+  @Override
+  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    super.onCreateOptionsMenu(menu, inflater);
+    inflater.inflate(R.menu.main, menu);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.action_refresh:
+        loadTips();
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 }
