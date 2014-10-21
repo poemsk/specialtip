@@ -103,7 +103,6 @@ public class FeedFragment extends Fragment {
         @Override
         public void success(List<Feed> feeds, Response response) {
           feedItems = (ArrayList<Feed>) feeds;
-          Log.d(TAG, feeds.size() + "");
           FeedAdapter adapter = new FeedAdapter(getActivity(), feedItems);
           adapter.notifyDataSetChanged();
           feedListView.setAdapter(adapter);
@@ -128,7 +127,7 @@ public class FeedFragment extends Fragment {
     SwipeFragment fragment = new SwipeFragment();
     fragmentTransaction.addToBackStack(null);
     fragmentTransaction.hide(FeedFragment.this);
-    fragmentTransaction.add(R.id.container, fragment).commit();
+    fragmentTransaction.add(R.id.container, fragment).commitAllowingStateLoss();
   }
 
   @Override
