@@ -5,6 +5,9 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -37,15 +40,34 @@ public class SwipeFragment extends Fragment {
     refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override
       public void onRefresh() {
-
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        FeedFragment fragment = new FeedFragment();
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.hide(SwipeFragment.this);
-        fragmentTransaction.add(R.id.container, fragment).commit();
+        ReplaceCurrentFragment();
       }
     });
 
     return rootView;
+  }
+
+  private void ReplaceCurrentFragment() {
+    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+    FeedFragment fragment = new FeedFragment();
+    fragmentTransaction.addToBackStack(null);
+    fragmentTransaction.hide(SwipeFragment.this);
+    fragmentTransaction.add(R.id.container, fragment).commit();
+  }
+
+  @Override
+  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    super.onCreateOptionsMenu(menu, inflater);
+    inflater.inflate(R.menu.main, menu);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.action_refresh:
+        ReplaceCurrentFragment();
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 }

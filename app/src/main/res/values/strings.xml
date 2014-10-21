@@ -4,7 +4,8 @@
   <string name="app_name">Special Tips</string>
   <string name="swipe_to_refresh">Can\'t fetch tips. Please Swipe to refresh!</string>
   <string name="check_connection">Please check your connection!</string>
-  <string name="action_settings">Refresh</string>
+  <string name="action_refresh">Refresh</string>
+  <string name="action_info">About</string>
   <string name="share">Share</string>
 
 </resources>

@@ -1,7 +1,9 @@
 package com.poepoemyintswe.specialtips.fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ListView;
 import android.widget.Toast;
 import butterknife.ButterKnife;
@@ -140,7 +143,24 @@ public class FeedFragment extends Fragment {
       case R.id.action_refresh:
         loadTips();
         return true;
+      case R.id.action_info:
+        show();
+        return true;
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  private void show() {
+    WebView webView = new WebView(getActivity());
+    webView.loadUrl("file:///android_asset/about.html");
+    new AlertDialog.Builder(getActivity()).setTitle(R.string.action_info)
+        .setView(webView)
+        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int whichButton) {
+            dialog.dismiss();
+          }
+        })
+        .create()
+        .show();
   }
 }
