@@ -103,6 +103,7 @@ public class FeedFragment extends Fragment {
           Log.d(TAG, error.toString());
           Toast.makeText(getActivity(), "Please Try Again....", Toast.LENGTH_SHORT).show();
           StopRefreshing();
+
           ReplaceCurrentFragment();
         }
       });
