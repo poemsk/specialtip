@@ -2,6 +2,7 @@ package com.poepoemyintswe.specialtips.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class FeedAdapter extends BaseAdapter {
     final Feed feedItem = (Feed) getItem(position);
     holder.title.setText(feedItem.title);
     holder.date.setText(changeDateFormat(feedItem.date));
-    holder.content.setText(feedItem.content);
+    holder.content.setText(Html.fromHtml(feedItem.content));
     holder.share.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
         Share(feedItem.permalink);
