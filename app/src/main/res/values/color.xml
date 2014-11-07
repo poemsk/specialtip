@@ -15,5 +15,6 @@
 
   <!--Actionbar Colors-->
   <color name="actionbar_text">#ffffffff</color>
-  <color name="actionbar_color">#009688</color>
+  <color name="primary">#009688</color>
+  <color name="primary_dark">#00695C</color>
 </resources>

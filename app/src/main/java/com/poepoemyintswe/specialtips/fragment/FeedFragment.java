@@ -15,12 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ListView;
-import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.poepoemyintswe.specialtips.Config;
 import com.poepoemyintswe.specialtips.R;
 import com.poepoemyintswe.specialtips.adapter.FeedAdapter;
+import com.poepoemyintswe.specialtips.event.BusProvider;
+import com.poepoemyintswe.specialtips.event.NetworkError;
+import com.poepoemyintswe.specialtips.event.ServerError;
 import com.poepoemyintswe.specialtips.models.Feed;
 import com.poepoemyintswe.specialtips.service.GetFeed;
 import com.poepoemyintswe.specialtips.util.NetworkConnectivityCheck;
@@ -48,7 +50,6 @@ public class FeedFragment extends Fragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    // Add this method for this fragment to handle the menu
     setHasOptionsMenu(true);
   }
 
@@ -59,12 +60,14 @@ public class FeedFragment extends Fragment {
   }
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+                                     Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_feed, container, false);
 
     ButterKnife.inject(this, rootView);
     swipeRefreshLayout.setColorSchemeResources(R.color.swipe_refresh_color1,
-        R.color.swipe_refresh_color2, R.color.swipe_refresh_color3, R.color.swipe_refresh_color4);
+                                                  R.color.swipe_refresh_color2,
+                                                  R.color.swipe_refresh_color3,
+                                                  R.color.swipe_refresh_color4);
 
     swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override
@@ -74,6 +77,16 @@ public class FeedFragment extends Fragment {
     });
 
     return rootView;
+  }
+
+  @Override public void onResume() {
+    super.onResume();
+    BusProvider.getInstance().register(this);
+  }
+
+  @Override public void onPause() {
+    super.onPause();
+    BusProvider.getInstance().unregister(this);
   }
 
   public void StartRefreshing() {
@@ -92,10 +105,9 @@ public class FeedFragment extends Fragment {
     if (NetworkConnectivityCheck.getInstance(getActivity()).isConnected()) {
       feedItems = new ArrayList<Feed>();
       StartRefreshing();
-
       RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(Config.BASE_URL)
-          .setLogLevel(RestAdapter.LogLevel.BASIC)
-          .build();
+                                    .setLogLevel(RestAdapter.LogLevel.BASIC)
+                                    .build();
 
       GetFeed getFeed = restAdapter.create(GetFeed.class);
 
@@ -114,11 +126,12 @@ public class FeedFragment extends Fragment {
           Log.d(TAG, error.toString());
           StopRefreshing();
           ReplaceCurrentFragment();
+          BusProvider.getInstance().post(new ServerError(R.string.swipe_to_refresh));
         }
       });
     } else {
       ReplaceCurrentFragment();
-      Toast.makeText(getActivity(), R.string.check_connection, Toast.LENGTH_SHORT).show();
+      BusProvider.getInstance().post(new NetworkError(R.string.check_connection));
     }
   }
 

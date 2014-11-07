@@ -17,6 +17,10 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.poepoemyintswe.specialtips.R;
+import com.poepoemyintswe.specialtips.event.BusProvider;
+import com.poepoemyintswe.specialtips.event.NetworkError;
+import com.poepoemyintswe.specialtips.event.ServerError;
+import com.squareup.otto.Subscribe;
 
 /**
  * Created by poepoe on 10/21/14.
@@ -37,7 +41,7 @@ public class SwipeFragment extends Fragment {
   }
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+                                     Bundle savedInstanceState) {
 
     View rootView = inflater.inflate(R.layout.fragment_swipe, container, false);
     ButterKnife.inject(this, rootView);
@@ -45,7 +49,9 @@ public class SwipeFragment extends Fragment {
     msg.setText(R.string.swipe_to_refresh);
 
     refreshLayout.setColorSchemeResources(R.color.swipe_refresh_color1,
-        R.color.swipe_refresh_color2, R.color.swipe_refresh_color3, R.color.swipe_refresh_color4);
+                                             R.color.swipe_refresh_color2,
+                                             R.color.swipe_refresh_color3,
+                                             R.color.swipe_refresh_color4);
 
     refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override
@@ -55,6 +61,24 @@ public class SwipeFragment extends Fragment {
     });
 
     return rootView;
+  }
+
+  @Override public void onResume() {
+    super.onResume();
+    BusProvider.getInstance().register(this);
+  }
+
+  @Override public void onPause() {
+    super.onPause();
+    BusProvider.getInstance().unregister(this);
+  }
+
+  @Subscribe public void networkError(NetworkError event) {
+    msg.setText(event.result);
+  }
+
+  @Subscribe public void serverError(ServerError event) {
+    msg.setText(event.result);
   }
 
   private void ReplaceCurrentFragment() {
