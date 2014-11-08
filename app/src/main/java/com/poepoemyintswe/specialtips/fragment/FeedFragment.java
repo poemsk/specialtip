@@ -126,7 +126,7 @@ public class FeedFragment extends Fragment {
           Log.d(TAG, error.toString());
           StopRefreshing();
           ReplaceCurrentFragment();
-          BusProvider.getInstance().post(new ServerError(R.string.swipe_to_refresh));
+          BusProvider.getInstance().post(new ServerError(error));
         }
       });
     } else {

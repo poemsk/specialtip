@@ -12,7 +12,6 @@
         android:id="@+id/msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TitleStyle"
-        android:text="@string/swipe_to_refresh"/>
+        style="@style/TitleStyle"/>
   </RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

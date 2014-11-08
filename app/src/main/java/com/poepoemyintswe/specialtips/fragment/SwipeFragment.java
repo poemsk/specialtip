@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,8 +47,6 @@ public class SwipeFragment extends Fragment {
     View rootView = inflater.inflate(R.layout.fragment_swipe, container, false);
     ButterKnife.inject(this, rootView);
 
-    msg.setText(R.string.swipe_to_refresh);
-
     refreshLayout.setColorSchemeResources(R.color.swipe_refresh_color1,
                                              R.color.swipe_refresh_color2,
                                              R.color.swipe_refresh_color3,
@@ -78,7 +77,8 @@ public class SwipeFragment extends Fragment {
   }
 
   @Subscribe public void serverError(ServerError event) {
-    msg.setText(event.result);
+    msg.setText(event.error.getMessage());
+    Log.d("Error", event.error.getMessage());
   }
 
   private void ReplaceCurrentFragment() {
